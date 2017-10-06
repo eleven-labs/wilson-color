@@ -12,7 +12,7 @@ export default function createView (state, emit) {
         <div>
           <button class="btn" onclick=${outlineButtonClick}>Contour</button>
           <button class="btn">Arrière-plan</button>
-          <button class="btn">Réinitialiser</button>
+          <button class="btn" onclick=${resetButtonClick}>Réinitialiser</button>
         </div>
       </div>
       <div>
@@ -26,6 +26,10 @@ export default function createView (state, emit) {
 
   function colorInputChanged (event) {
     emit('colorSelected', event.target.value)
+  }
+
+  function resetButtonClick () {
+    window.location.reload()
   }
 
   function wilsonLoaded (event) {
