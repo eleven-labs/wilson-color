@@ -1,0 +1,53 @@
+body {
+  background-color: black;
+  font-family: Courier New, Courier, monospace;
+  color: white;
+  overflow-x: hidden;
+}
+
+h1 {
+  animation: titlecolor 200ms infinite;
+}
+
+a {
+  color: yellow;
+  text-decoration: none;
+}
+
+.btn {
+  color: yellow;
+  display: inline-block;
+  border: 1px solid yellow;
+  padding: 0px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+button:focus {outline:0;}
+
+.shiny {
+  text-shadow: 0 0 10px yellow;
+}
+
+#wilson {
+  height: 600px;
+}
+
+@keyframes titlecolor {
+  0%   {color: red;}
+  16%  {color: orange;}
+  32%  {color: yellow;}
+  49%  {color: lime;}
+  66% {color: blue;}
+  83% {color: purple;}
+  100% {color: red;}
+}
+
+.footer {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+}
