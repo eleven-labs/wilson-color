@@ -5,6 +5,11 @@ body {
   overflow-x: hidden;
 }
 
+ul.colorHistory {
+  padding: 0;
+  margin: 0;
+}
+
 h1 {
   animation: titlecolor 200ms infinite;
 }
@@ -32,6 +37,17 @@ button:focus {outline:0;}
 
 #wilson {
   height: 600px;
+}
+
+.colorHistory li {
+  list-style: none;
+  width: 40px;
+  height: 20px;
+  display: inline-block;
+  border: 1px solid yellow;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 @keyframes titlecolor {
