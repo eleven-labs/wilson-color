@@ -1,5 +1,6 @@
 import html from 'choo/html'
 import colorHistoryView from './colorHistory'
+import wilsonLib from '../lib/wilson'
 
 export default function createView (state, emit) {
   return html`
@@ -32,10 +33,9 @@ export default function createView (state, emit) {
     window.location.reload()
   }
 
-  function wilsonLoaded (event) {
-    const pathArray = Array.from(event.currentTarget.contentDocument.getElementsByTagName('path'))
-    pathArray.forEach(function (path) {
-      path.onclick = function (event) {
+  function wilsonLoaded () {
+    wilsonLib.getShapes().forEach(function (shape) {
+      shape.onclick = function (event) {
         emit('paint', {elementId: event.currentTarget.id, color: state.selectedColor})
       }
     })

@@ -9,7 +9,6 @@ export default function colorHistoryView (state, emit) {
     <div>
       <span>Couleurs utilisées : </span>
       <ul class="colorHistory">${previousColorViews}</ul>
-      <div class="clear-float"></div>
     </div>
   `
 }
