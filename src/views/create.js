@@ -4,9 +4,9 @@ import wilsonLib from '../lib/wilson'
 
 export default function createView (state, emit) {
   return html`
-    <div>
-      <span>Utilisez la palette pour sélectioner une couleur, puis cliquez sur Wilson pour le colorier</span>
-      <div>
+    <div class="content">
+      <div class="card">Utilisez la palette pour sélectioner une couleur, puis cliquez sur Wilson pour le colorier</div>
+      <div class="card toolbox">
         <div>
           Couleur active : <input type="color" class="btn" value="${state.selectedColor}" onchange=${colorInputChanged} />${colorHistoryView(state, emit)}
         </div>
@@ -14,6 +14,7 @@ export default function createView (state, emit) {
           <button class="btn" onclick=${outlineButtonClick}>Contour</button>
           <button class="btn">Arrière-plan</button>
           <button class="btn" onclick=${resetButtonClick}>Réinitialiser</button>
+          <button class="btn btn-save" onclick=${saveButtonClick}>Enregistrer</button>
         </div>
       </div>
       <div>
@@ -31,6 +32,10 @@ export default function createView (state, emit) {
 
   function resetButtonClick () {
     window.location.reload()
+  }
+
+  function saveButtonClick () {
+    console.log(state)
   }
 
   function wilsonLoaded () {

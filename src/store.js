@@ -7,7 +7,7 @@ export default function initStore (app) {
 function colorsStore (state, emitter) {
   state.selectedColor = '#FF00FF'
   state.wilson = {}
-  state.previousColors = []
+  state.previousColors = ['#ffffff', '#ffff00', '#000000', '#999999']
 
   emitter.on('colorSelected', function (color) {
     state.selectedColor = color

@@ -1,8 +1,32 @@
 body {
-  background-color: black;
+  background-color: #2d2d2d;
   font-family: Courier New, Courier, monospace;
   color: white;
+  text-shadow: 0px 1px 2px black;
+  margin: 0;
+  user-select: none;
   overflow-x: hidden;
+}
+
+.home-nav {
+  margin: 20px;
+}
+
+.content {
+    margin: 10px;
+    /* text-align: center; */
+}
+
+.card {
+  padding: 10px;
+  background-color: #111111;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px 2px black;
+}
+
+.toolbox {
+    text-align: left;
+    width: 300px;
 }
 
 ul.colorHistory {
@@ -11,7 +35,17 @@ ul.colorHistory {
 }
 
 h1 {
-  animation: titlecolor 200ms infinite;
+  display: block;
+  width: 100%;
+  background-color: black;
+  margin: 0;
+  color: yellow;
+  text-align: center;
+  box-shadow: 0 0 10px 2px black;
+}
+
+h1:hover {
+  animation: titlecolor 100ms infinite;
 }
 
 a {
@@ -23,12 +57,21 @@ a {
   color: yellow;
   display: inline-block;
   border: 1px solid yellow;
-  padding: 0px 10px;
+  padding: 2px 10px;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
+  margin: 5px 4px;
 }
 
+.btn-save {
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+button {
+  font-family: Courier New, Courier, monospace;
+}
 button:focus {outline:0;}
 
 .shiny {
@@ -37,6 +80,9 @@ button:focus {outline:0;}
 
 #wilson {
   height: 600px;
+  margin: auto;
+  text-align: center;
+  display: block;
 }
 
 .colorHistory li {
@@ -61,9 +107,10 @@ button:focus {outline:0;}
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   width: 100%;
   text-align: center;
   bottom: 0;
+  background-color: black;
 }
