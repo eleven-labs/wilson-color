@@ -6,14 +6,21 @@ function getShapes (wilsonDocument) {
   return [...pathArray, ...circleArray, ...ellipseArray]
 }
 
-function paint ({elementId, color}) {
+function paint (elementId, color) {
   const wilson = getWilsonDocument()
   const outline = wilson.getElementById(elementId)
   outline.style.fill = color
+}
+
+function repaint (colorList) {
+  const wilson = getWilsonDocument()
+  Object.keys(colorList).forEach(key => {
+    wilson.getElementById(key).style.fill = colorList[key]
+  })
 }
 
 function getWilsonDocument () {
   return document.getElementById('wilson') && document.getElementById('wilson').contentDocument
 }
 
-export default {getShapes, paint}
+export default {getShapes, paint, repaint}

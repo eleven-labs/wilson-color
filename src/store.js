@@ -7,7 +7,7 @@ export default function initStore (app) {
 function colorsStore (state, emitter) {
   state.selectedColor = '#FF00FF'
   state.wilson = {}
-  state.previousColors = ['#ffffff', '#ffff00', '#000000', '#999999']
+  state.previousColors = []
 
   emitter.on('colorSelected', function (color) {
     state.selectedColor = color
@@ -15,7 +15,7 @@ function colorsStore (state, emitter) {
   })
 
   emitter.on('paint', function ({elementId, color}) {
-    wilsonLib.paint({elementId, color})
+    wilsonLib.paint(elementId, color)
     state.wilson[elementId] = color
     if (!state.previousColors.find(previousColor => previousColor === color)) state.previousColors.push(color)
     if (state.previousColors.length > 5) state.previousColors.splice(0, 1)

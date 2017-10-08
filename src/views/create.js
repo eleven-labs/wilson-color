@@ -1,6 +1,9 @@
 import html from 'choo/html'
 import colorHistoryView from './colorHistory'
+import savingView from './saving'
 import wilsonLib from '../lib/wilson'
+import loadScript from 'load-script'
+import Sticky from 'sticky-js'
 
 export default function createView (state, emit) {
   return html`
@@ -17,7 +20,8 @@ export default function createView (state, emit) {
           <button class="btn btn-save" onclick=${saveButtonClick}>Enregistrer</button>
         </div>
       </div>
-      <div>
+      ${savingView(state, emit)}
+      <div class="wilson-container">
         <object id="wilson" data="wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
       </div>
     </div>
@@ -35,14 +39,29 @@ export default function createView (state, emit) {
   }
 
   function saveButtonClick () {
+    const saving = document.getElementsByClassName('saving')[0]
+    saving.classList.add('jelly')
+    saving.classList.remove('hidden')
     console.log(state)
   }
 
   function wilsonLoaded () {
+    initRecaptcha()
+    initSticky()
     wilsonLib.getShapes().forEach(function (shape) {
       shape.onclick = function (event) {
         emit('paint', {elementId: event.currentTarget.id, color: state.selectedColor})
       }
     })
+    wilsonLib.repaint(state.wilson)
+  }
+
+  function initRecaptcha () {
+    loadScript('https://www.google.com/recaptcha/api.js')
+  }
+
+  function initSticky () {
+    const stickyToolbox = new Sticky('.toolbox')
+    return stickyToolbox
   }
 }
