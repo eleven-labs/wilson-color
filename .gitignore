@@ -1,3 +1,7 @@
 node_modules
-bundle.js
+public/bundle.js
 yarn.lock
+public/bundle.js.map
+config.js
+public/images/*.png
+.vscode

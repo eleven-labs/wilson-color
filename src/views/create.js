@@ -1,6 +1,8 @@
 import html from 'choo/html'
 import colorHistoryView from './colorHistory'
+import savingView from './saving'
 import wilsonLib from '../lib/wilson'
+import Sticky from 'sticky-js'
 
 export default function createView (state, emit) {
   return html`
@@ -12,13 +14,13 @@ export default function createView (state, emit) {
         </div>
         <div>
           <button class="btn" onclick=${outlineButtonClick}>Contour</button>
-          <button class="btn">Arrière-plan</button>
           <button class="btn" onclick=${resetButtonClick}>Réinitialiser</button>
           <button class="btn btn-save" onclick=${saveButtonClick}>Enregistrer</button>
         </div>
       </div>
-      <div>
-        <object id="wilson" data="wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
+      ${state.saving.isSaving ? savingView(state, emit) : null}
+      <div class="wilson-container">
+        <object id="wilson" data="images/wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
       </div>
     </div>
   `
@@ -35,14 +37,22 @@ export default function createView (state, emit) {
   }
 
   function saveButtonClick () {
+    emit('save:visible', true)
     console.log(state)
   }
 
   function wilsonLoaded () {
+    initSticky()
     wilsonLib.getShapes().forEach(function (shape) {
       shape.onclick = function (event) {
         emit('paint', {elementId: event.currentTarget.id, color: state.selectedColor})
       }
     })
+    wilsonLib.repaint(state.wilson)
+  }
+
+  function initSticky () {
+    const stickyToolbox = new Sticky('.toolbox')
+    return stickyToolbox
   }
 }
