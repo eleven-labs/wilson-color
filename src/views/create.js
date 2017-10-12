@@ -2,7 +2,6 @@ import html from 'choo/html'
 import colorHistoryView from './colorHistory'
 import savingView from './saving'
 import wilsonLib from '../lib/wilson'
-import loadScript from 'load-script'
 import Sticky from 'sticky-js'
 
 export default function createView (state, emit) {
@@ -15,14 +14,13 @@ export default function createView (state, emit) {
         </div>
         <div>
           <button class="btn" onclick=${outlineButtonClick}>Contour</button>
-          <button class="btn">Arrière-plan</button>
           <button class="btn" onclick=${resetButtonClick}>Réinitialiser</button>
           <button class="btn btn-save" onclick=${saveButtonClick}>Enregistrer</button>
         </div>
       </div>
-      ${savingView(state, emit)}
+      ${state.saving.isSaving ? savingView(state, emit) : null}
       <div class="wilson-container">
-        <object id="wilson" data="wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
+        <object id="wilson" data="images/wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
       </div>
     </div>
   `
@@ -39,14 +37,11 @@ export default function createView (state, emit) {
   }
 
   function saveButtonClick () {
-    const saving = document.getElementsByClassName('saving')[0]
-    saving.classList.add('jelly')
-    saving.classList.remove('hidden')
+    emit('save:visible', true)
     console.log(state)
   }
 
   function wilsonLoaded () {
-    initRecaptcha()
     initSticky()
     wilsonLib.getShapes().forEach(function (shape) {
       shape.onclick = function (event) {
@@ -54,10 +49,6 @@ export default function createView (state, emit) {
       }
     })
     wilsonLib.repaint(state.wilson)
-  }
-
-  function initRecaptcha () {
-    loadScript('https://www.google.com/recaptcha/api.js')
   }
 
   function initSticky () {

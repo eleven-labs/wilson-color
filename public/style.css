@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+h2 {
+    color: yellow;
+}
+
 .home-nav {
   margin: 20px;
 }
@@ -96,6 +100,17 @@ button:focus, input:focus {outline:0;}
   text-shadow: 0 0 10px yellow;
 }
 
+.blur-filter {
+  filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 10;
+}
+
 .hidden {
   display: none;
 }
@@ -146,6 +161,26 @@ button:focus, input:focus {outline:0;}
 .jelly {
   animation: animation 1000ms linear both;
   display: block;
+}
+
+.error {
+    color: coral;
+}
+
+.wilson {
+  display: inline-block;
+  border: 1px solid yellow;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.wilson img {
+  height: 200px;
+}
+
+.wilson div {
+  text-align: center;
+  color: yellow;
 }
 
 /* Generated with Bounce.js. Edit at https://goo.gl/Vn2Euz */
