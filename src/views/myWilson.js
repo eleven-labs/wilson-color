@@ -92,4 +92,11 @@ export default function homeView(state, emit) {
           }
         })
   }
+
+  function addMetas() {
+    document.querySelector('meta[property="og:url"]').content =
+      window.location.href
+    document.querySelector('meta[property="og:image"]').content = `${window
+      .location.hostname}/image/${state.myWilson.uid}.png`
+  }
 }
