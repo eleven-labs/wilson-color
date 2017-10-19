@@ -16,20 +16,33 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
-app.post('/save', function (req, res) {
-  recaptcha.validateRequest(req).then(() => {
-    database.insertWilson(req.body.name, req.body.wilsonData, req.body.email, (result) => {
-      res.json({formSubmit: true})
-      svgExport.toPng(req.body.wilsonData, result.ops[0].uid)
+app.post('/save', function(req, res) {
+  recaptcha
+    .validateRequest(req)
+    .then(() => {
+      database.insertWilson(
+        req.body.name,
+        req.body.wilsonData,
+        req.body.email,
+        result => {
+          res.json({ formSubmit: true })
+          svgExport.toPng(req.body.wilsonData, result.ops[0].uid)
+        }
+      )
     })
-  }).catch(errorCodes => {
-    res.json({formSubmit: false, errors: recaptcha.translateErrors(errorCodes)})
-  })
+    .catch(errorCodes => {
+      res.json({
+        formSubmit: false,
+        errors: recaptcha.translateErrors(errorCodes)
+      })
+    })
 })
 
 app.get('/wilsons', database.getWilsons)
 
-app.get('/*', function (req, res) {
+app.get('/wilsons/:id', database.getWilson)
+
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
