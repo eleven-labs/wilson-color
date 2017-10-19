@@ -5,3 +5,4 @@ public/bundle.js.map
 config.js
 public/images/*.png
 .vscode
+yarn-error.log
