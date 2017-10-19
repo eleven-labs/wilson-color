@@ -5,6 +5,8 @@ import loadScript from 'load-script'
 const siteKey = '6Lc57TQUAAAAAPhRKtmHlNI0MWtGwDY5inl-upQ6'
 
 export default function homeView(state, emit) {
+  const url = window.location.href
+
   const view = html`
     <div class="my-wilson">
       <img src="images/${state.myWilson.uid}.png" />
@@ -18,6 +20,19 @@ export default function homeView(state, emit) {
             </button>
             <span>${state.myWilson.vote || '0'}</span>
           </div>
+        </div>
+        <div>
+          <a
+            class="fb-xfbml-parse-ignore"
+            target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=${url}">
+              <img width="20" height="20" src="/images/facebook.svg">
+          </a>
+          <a
+            target="_blank"
+            href="https://twitter.com/intent/tweet?text=${url}">
+              <img src="/images/twitter.svg" width="20" height="20"/>
+          </a>
         </div>
     </div>
   `
@@ -34,6 +49,8 @@ export default function homeView(state, emit) {
       .then(data => data.json())
       .then(data => {
         emit('my-wilson:loaded', data)
+        addMetas()
+
         loadScript(
           `https://www.google.com/recaptcha/api.js?onload=initRecaptcha&render=explicit`
         )
@@ -42,7 +59,6 @@ export default function homeView(state, emit) {
   }
 
   function initRecaptcha() {
-    console.log('initRecaptcha')
     const el = document.querySelector('.g-recaptcha')
 
     grecaptcha.render(el.id, {
