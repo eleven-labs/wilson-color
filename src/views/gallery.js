@@ -2,6 +2,7 @@ import onload from 'on-load'
 import loadScript from 'load-script'
 import wilsonThumbnail from './wilsonThumbnail'
 const html = require('choo/html')
+
 const siteKey = '6Lc57TQUAAAAAPhRKtmHlNI0MWtGwDY5inl-upQ6'
 
 export default function gallery(state, emit) {
@@ -20,12 +21,12 @@ export default function gallery(state, emit) {
   function init() {
     window.fetch('/wilsons').then(data => data.json()).then(data => {
       emit('wilsons:loaded', data)
+
+      loadScript(
+        'https://www.google.com/recaptcha/api.js?onload=initRecaptcha&render=explicit'
+      )
     })
     window.initRecaptcha = initRecaptcha
-
-    loadScript(
-      `https://www.google.com/recaptcha/api.js?onload=initRecaptcha&render=explicit`
-    )
   }
 
   function initRecaptcha() {
