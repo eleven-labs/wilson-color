@@ -25,7 +25,7 @@ app.post('/save', function(req, res) {
         req.body.wilsonData,
         req.body.email,
         result => {
-          res.json({ formSubmit: true })
+          res.json({ formSubmit: true, uid: result.uid })
           svgExport.toPng(req.body.wilsonData, result.ops[0].uid)
         }
       )

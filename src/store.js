@@ -3,6 +3,7 @@ import wilsonLib from './lib/wilson'
 export default function initStore(app) {
   app.use(colorsStore)
   app.use(savingStore)
+  app.use(sucessStore)
   app.use(wilsonsStore)
   app.use(myWilsonStore)
 }
@@ -58,6 +59,15 @@ function savingStore(state, emitter) {
 
   emitter.on('save:error', function(isOnError) {
     state.saving.isOnError = isOnError
+    emitter.emit('render')
+  })
+}
+
+function sucessStore(state, emitter) {
+  state.success = false
+
+  emitter.on('success:visible', function(isVisible) {
+    state.success = isVisible
     emitter.emit('render')
   })
 }

@@ -1,6 +1,7 @@
 import html from 'choo/html'
 import colorHistoryView from './colorHistory'
 import savingView from './saving'
+import successView from './success'
 import wilsonLib from '../lib/wilson'
 import Sticky from 'sticky-js'
 
@@ -21,6 +22,7 @@ export default function createView(state, emit) {
         </div>
       </div>
       ${state.saving.isSaving ? savingView(state, emit) : null}
+      ${state.success ? successView(state, emit) : null}
       <div class="wilson-container">
         <object id="wilson" data="images/wilson.svg" type="image/svg+xml" onload=${wilsonLoaded}></object>
       </div>
