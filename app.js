@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 const ReCAPTCHA = require('recaptcha2')
 const recaptchaConfig = require('./config').recaptcha
 const database = require('./src/lib/database')
+const twitter = require('./src/lib/twitter')
 const svgExport = require('./src/lib/svgExport')
 
 const recaptcha = new ReCAPTCHA(recaptchaConfig)
@@ -38,7 +39,7 @@ app.post('/save', function(req, res) {
     })
 })
 
-app.get('/wilsons', database.getWilsons)
+app.get('/wilsons', twitter.getWilsons)
 
 app.get('/wilsons/:id', database.getWilson)
 

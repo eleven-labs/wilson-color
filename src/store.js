@@ -10,11 +10,27 @@ export default function initStore(app) {
 }
 
 function wilsonsStore(state, emitter) {
-  state.wilsons = []
+  state.wilsons = {
+    list: [],
+    error: ''
+  }
 
   emitter.on('wilsons:loaded', data => {
-    state.wilsons = data
+    state.wilsons.list = data.wilsons
+    state.wilsons.error = ''
     emitter.emit('render')
+  })
+
+  emitter.on('wilsons:updated', data => {
+    state.wilsons.list = [...state.wilsons.list, ...data.wilsons].filter(
+      (wilson, index, array) =>
+        array.findIndex(({ id }) => id === wilson.id) === index
+    )
+    state.wilsons.error = ''
+  })
+
+  emitter.on('wilsons:error', error => {
+    state.wilsons.error = error
   })
 }
 

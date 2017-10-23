@@ -186,6 +186,21 @@ input:focus {
   color: coral;
 }
 
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.gallery .list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .wilson {
   display: inline-block;
   border: 1px solid yellow;
@@ -200,6 +215,31 @@ input:focus {
 .wilson div {
   text-align: center;
   color: yellow;
+}
+
+.wilson .author {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wilson .infos {
+  border-top: 1px solid yellow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.wilson .infos div {
+  margin: 5px;
+}
+
+.wilson .vote-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .my-wilson {
@@ -229,8 +269,6 @@ input:focus {
 .my-wilson .votes {
   height: 35px;
 }
-
-/* Generated with Bounce.js. Edit at https://goo.gl/Vn2Euz */
 
 @keyframes animation {
   0% {

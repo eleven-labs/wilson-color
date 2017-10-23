@@ -19,6 +19,7 @@
     "debug": "~2.6.3",
     "domino": "^1.0.29",
     "express": "~4.15.2",
+    "isomorphic-fetch": "^2.2.1",
     "jade": "~1.11.0",
     "load-script": "^1.0.0",
     "lowdb": "^1.0.0",
