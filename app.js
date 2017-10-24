@@ -12,7 +12,7 @@ const recaptcha = new ReCAPTCHA(recaptchaConfig)
 
 var app = express()
 
-app.set('view engine', 'html')
+app.set('view engine', 'jade')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -44,7 +44,12 @@ app.get('/wilsons', twitter.getWilsons)
 app.get('/wilsons/:id', database.getWilson)
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+  const uid = req.query.id
+  const twitterImage = uid
+    ? `/images/${uid}.png`
+    : 'http://eleven-labs.com/ui/img/rocket_alpha.png'
+
+  res.render(path.join(__dirname, 'public', 'index'), { twitterImage })
 })
 
 app.listen(3000)

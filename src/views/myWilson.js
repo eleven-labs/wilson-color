@@ -4,6 +4,8 @@ import loadScript from 'load-script'
 
 export default function homeView(state, emit) {
   const url = window.location.href
+  const searchParams = new URLSearchParams(window.location.search)
+  const wilsonId = searchParams.get('id')
 
   const view = html`
     <div>
@@ -15,9 +17,6 @@ export default function homeView(state, emit) {
           <div class="infos">
             <div class="author">Wilson créé par ${state.myWilson.name ||
               'Wilson'}</div>
-            <div class="vote-container">
-              <span>${state.myWilson.vote || '0'}</span>
-            </div>
           </div>
           <div>
             <a
@@ -51,17 +50,8 @@ export default function homeView(state, emit) {
       .then(data => data.json())
       .then(data => {
         emit('my-wilson:loaded', data)
-        addMetas()
+        loadScript('//platform.twitter.com/widgets.js')
       })
       .catch(err => console.log(err))
-  }
-
-  function addMetas() {
-    document.querySelector('meta[property="og:url"]').content =
-      window.location.href
-    document.querySelector('meta[property="og:image"]').content = `${window
-      .location.hostname}/image/${state.myWilson.uid}.png`
-    document.querySelector('meta[name="twitter:image"]').content = `${window
-      .location.hostname}/image/${state.myWilson.uid}.png`
   }
 }
