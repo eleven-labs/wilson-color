@@ -5,7 +5,6 @@ import mailingView from './mailing'
 import { recaptcha } from '../../config'
 import onload from 'on-load'
 
-
 export default function savingView(state, emit) {
   const view = html`
     <div class="card saving jelly">
@@ -56,6 +55,7 @@ export default function savingView(state, emit) {
       .then(data => {
         if (data.formSubmit) {
           emit('save:visible', false)
+          emit('success:visible', data.uid)
         } else {
           const errorSpan = document.getElementsByClassName('error').item(0)
           errorSpan.classList.add('jelly')
