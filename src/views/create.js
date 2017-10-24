@@ -37,7 +37,6 @@ export default function createView(state, emit) {
 
   function saveButtonClick() {
     emit('save:visible', true)
-    console.log(state)
   }
 
   function wilsonLoaded() {

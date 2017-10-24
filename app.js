@@ -33,6 +33,11 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.listen(3000)
+if(process.env.NODE_ENV === 'prod') {
+  app.listen(80)
+}
+else {
+  app.listen(3000)
+}
 
 module.exports = app
