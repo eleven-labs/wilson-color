@@ -25,7 +25,7 @@ app.post('/save', function(req, res) {
         req.body.wilsonData,
         req.body.email,
         result => {
-          res.json({ formSubmit: true, uid: result.uid })
+          res.json({ formSubmit: true, uid: result.ops[0].uid })
           svgExport.toPng(req.body.wilsonData, result.ops[0].uid)
         }
       )
@@ -46,10 +46,9 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-if(process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'prod') {
   app.listen(80)
-}
-else {
+} else {
   app.listen(3000)
 }
 
