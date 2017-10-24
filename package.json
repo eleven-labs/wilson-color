@@ -6,6 +6,7 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.watchConfig.js",
     "serve": "node app",
+    "prod": "NODE_ENV=prod forever app",
     "start": "run-p watch serve"
   },
   "dependencies": {
