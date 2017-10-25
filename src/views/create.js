@@ -4,6 +4,7 @@ import savingView from './saving'
 import successView from './success'
 import wilsonLib from '../lib/wilson'
 import Sticky from 'sticky-js'
+import colors from '../lib/colors'
 
 export default function createView(state, emit) {
   return html`
@@ -11,10 +12,19 @@ export default function createView(state, emit) {
       <div class="card">Utilisez la palette pour sélectioner une couleur, puis cliquez sur Wilson pour le colorier</div>
       <div class="card toolbox">
         <div>
-          Couleur active : <input type="color" class="btn" value="${state.selectedColor}" onchange=${colorInputChanged} />${colorHistoryView(
-    state,
-    emit
-  )}
+          Choix des couleurs :
+          ${colorHistoryView(
+            colors,
+            emit,
+            state.selectedColor,
+          )}
+          <div>
+            Couleurs utilisées :
+            ${colorHistoryView(
+              state.previousColors,
+              emit
+            )}
+          </div>
         </div>
         <div>
           <button class="btn" onclick=${resetButtonClick}>Réinitialiser</button>

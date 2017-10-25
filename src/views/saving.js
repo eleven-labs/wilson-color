@@ -8,7 +8,7 @@ import onload from 'on-load'
 export default function savingView(state, emit) {
   const view = html`
     <div class="card saving jelly">
-      <h2>Nommez votre création !</h2>
+      <h2>Wilson créé par</h2>
       <input type="text" name="name" class="btn" placeholder="Nom"/>
       <button class="btn close" onclick=${closeButtonClick}></button>
       <form>

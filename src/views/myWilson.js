@@ -13,7 +13,7 @@ export default function homeView(state, emit) {
       <div class="my-wilson">
         <img src="images/${state.myWilson.uid}.png" />
           <div class="infos">
-            <div class="author">créé par ${state.myWilson.name ||
+            <div class="author">Wilson créé par ${state.myWilson.name ||
               'Wilson'}</div>
             <div class="vote-container">
               <span>${state.myWilson.vote || '0'}</span>
@@ -26,7 +26,7 @@ export default function homeView(state, emit) {
               href="https://twitter.com/share"
               data-url="${url}"
               data-size="large"
-              data-text="Votez pour moi !"
+              data-text="Votez pour mon Wilson en likant ce tweet !” Pour participer au concours de création :"
               data-hashtags="WilsonColor, ElevenLabs"
               data-via="Eleven_Labs">
             </a>
@@ -38,7 +38,11 @@ export default function homeView(state, emit) {
   return view
 
   function init() {
-    loadScript('//platform.twitter.com/widgets.js')
+    if(state.justCreated) {
+      loadScript('//platform.twitter.com/widgets.js')
+      emit('created:success', false)
+    }
+
     const searchParams = new URLSearchParams(window.location.search)
     const wilsonId = searchParams.get('id')
 

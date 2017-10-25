@@ -13,5 +13,6 @@ export default function savingView(state, emit) {
 
   function closeButtonClick() {
     emit('success:visible', false)
+    emit('created:success', true)
   }
 }
