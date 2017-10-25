@@ -8,7 +8,7 @@ const Canvas = require('canvas')
 function toPng (colors, filename) {
   const window = domino.createWindow()
   const $ = Zepto(window)
-  fs.readFile(path.join(__dirname, '../../public/images/wilson.svg'), 'utf-8', (err, data) => {
+  fs.readFile(path.join(__dirname, '../../public/images/wilson-large.svg'), 'utf-8', (err, data) => {
     if (err) throw err
     const canvas = new Canvas()
     $('body').append(data)
