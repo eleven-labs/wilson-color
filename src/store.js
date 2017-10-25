@@ -6,6 +6,7 @@ export default function initStore(app) {
   app.use(sucessStore)
   app.use(wilsonsStore)
   app.use(myWilsonStore)
+  app.use(justCreated)
 }
 
 function wilsonsStore(state, emitter) {
@@ -27,7 +28,7 @@ function myWilsonStore(state, emitter) {
 }
 
 function colorsStore(state, emitter) {
-  state.selectedColor = '#FF00FF'
+  state.selectedColor = '#FFFFFF'
   state.wilson = {}
   state.previousColors = []
 
@@ -69,5 +70,12 @@ function sucessStore(state, emitter) {
   emitter.on('success:visible', function(isVisible) {
     state.success = isVisible
     emitter.emit('render')
+  })
+}
+
+function justCreated(state, emitter) {
+  state.justCreated = false
+  emitter.on('created:success', function(justCreated) {
+    state.justCreated = justCreated
   })
 }

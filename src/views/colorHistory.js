@@ -1,13 +1,12 @@
 import html from 'choo/html'
 import previousColorView from './previousColor'
 
-export default function colorHistoryView (state, emit) {
-  const previousColorViews = state.previousColors.map(color => {
-    return previousColorView(color, emit)
+export default function colorHistoryView (state, emit, selected) {
+  const previousColorViews = state.map(color => {
+    return selected === color ? previousColorView(color, emit, true) : previousColorView(color, emit, false)
   })
   return html`
     <div>
-      <span>Couleurs utilisées : </span>
       <ul class="colorHistory">${previousColorViews}</ul>
     </div>
   `
