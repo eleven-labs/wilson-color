@@ -3,11 +3,12 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 const ReCAPTCHA = require('recaptcha2')
-const recaptchaConfig = require('./config').recaptcha
+const recaptchaConfig = require('./config');
 const database = require('./src/lib/database')
 const twitter = require('./src/lib/twitter')
 const svgExport = require('./src/lib/svgExport')
 
+console.log(recaptchaConfig);
 const recaptcha = new ReCAPTCHA(recaptchaConfig)
 
 var app = express()
@@ -17,7 +18,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
-app.post('/save', function(req, res) {
+app.post('/save', function (req, res) {
   recaptcha
     .validateRequest(req)
     .then(() => {
@@ -43,7 +44,7 @@ app.get('/wilsons', twitter.getWilsons)
 
 app.get('/wilsons/:id', database.getWilson)
 
-app.get('/*', function(req, res) {
+app.get('/*', function (req, res) {
   const uid = req.query.id
   const twitterImage = uid
     ? `/images/${uid}.png`

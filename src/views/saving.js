@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import html from 'choo/html'
 import loadScript from 'load-script'
 import mailingView from './mailing'
-import { recaptcha } from '../../config'
+import recaptcha from '../config'
 import onload from 'on-load'
 
 export default function savingView(state, emit) {
