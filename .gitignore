@@ -5,3 +5,5 @@ public/bundle.js.map
 config.js
 public/images/*.png
 .vscode
+.DS_Store
+.next
